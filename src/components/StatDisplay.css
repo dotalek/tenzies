@@ -1,0 +1,16 @@
+.stat {
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  color: var(--accent-text);
+  border-radius: 1rem;
+  background: var(--blue);
+}
+
+.yellow {
+  background: var(--yellow);
+  color: var(--background);
+}
+
+.red {
+  background: var(--red);
+}
