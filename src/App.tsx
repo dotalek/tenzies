@@ -20,19 +20,22 @@ function App() {
     color: "red",
   });
   const [bestTime, setBestTime] = useState<Stat>({
-    name: "BestTime",
+    name: "Best Time",
     stat: Number(localStorage.getItem("bestTime")) || 0,
     color: "yellow",
   });
 
   useEffect(() => {
     // Save the highest score
-    const noRecord = Number(bestTime) === 0;
+    const noRecord = Number(bestTime.stat) === 0;
     const validTime = currentTime.stat > 0;
     const newRecord = currentTime.stat < Number(bestTime);
     if (tenzies && (noRecord || (validTime && newRecord))) {
       localStorage.setItem("bestTime", `${currentTime.stat}`);
-      setBestTime({ ...bestTime, stat: currentTime.stat });
+      setBestTime({
+        ...bestTime,
+        stat: currentTime.stat,
+      });
     }
   }, [tenzies]);
 
@@ -64,14 +67,14 @@ function App() {
   function startOver() {
     setDice(allNewDice());
     setTenzies(false);
-    setTotalRolls({
-      name: "Rolls",
+    setTotalRolls((prevTotalRolls) => ({
+      ...prevTotalRolls,
       stat: 0,
-    });
-    setCurrentTime({
-      name: "Time",
+    }));
+    setCurrentTime((prevCurrentTime) => ({
+      ...prevCurrentTime,
       stat: 0,
-    });
+    }));
   }
 
   function rollUnheld() {
