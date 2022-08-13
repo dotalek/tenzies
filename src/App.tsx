@@ -26,10 +26,11 @@ function App() {
   });
 
   useEffect(() => {
+    console.log("highscore effect");
     // Save the highest score
-    const noRecord = Number(bestTime.stat) === 0;
+    const noRecord = bestTime.stat === 0;
     const validTime = currentTime.stat > 0;
-    const newRecord = currentTime.stat < Number(bestTime);
+    const newRecord = currentTime.stat < bestTime.stat;
     if (tenzies && (noRecord || (validTime && newRecord))) {
       localStorage.setItem("bestTime", `${currentTime.stat}`);
       setBestTime({
@@ -46,7 +47,7 @@ function App() {
         () =>
           setCurrentTime((prevTime) => ({
             ...prevTime,
-            stat: prevTime.stat++,
+            stat: prevTime.stat + 1,
           })),
         1000,
       );
@@ -88,7 +89,7 @@ function App() {
     );
     setTotalRolls((prevTotalRolls) => ({
       ...prevTotalRolls,
-      stat: prevTotalRolls.stat++,
+      stat: prevTotalRolls.stat + 1,
     }));
   }
 
